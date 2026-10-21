@@ -28,4 +28,6 @@ Thumbs.db
 # Local logs
 *.log
 
+# Local Gradio files
 .gradio/
+
