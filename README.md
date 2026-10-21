@@ -1,96 +1,177 @@
-Shipment Exception Handling AI Agent
+# Shipment Exception Handling AI Agent
 
-An AI-powered application that analyzes shipment reports, identifies delivery exceptions, and estimates compensation using an LLM-based workflow.
+An AI-powered shipment triage assistant that analyzes shipment reports, classifies delivery exceptions, determines compensation, identifies cases requiring escalation, and drafts customer communications.
 
-Overview
+## Application Preview
 
-Shipment issues such as delivery delays, damaged packages, and lost shipments require timely identification and appropriate handling.
+<img width="1610" height="1881" alt="Shipment_desk" src="https://github.com/user-attachments/assets/a792f12e-ef97-421d-8373-5321859d62bd" />
 
-This project uses Python and a Large Language Model (LLM) to process shipment reports, classify exceptions, and generate structured results for further processing.
 
-Features
+## Overview
 
-Exception Classification: Identifies shipment issues such as delays, damaged packages, and lost shipments.
+Shipment issues such as delayed deliveries, damaged packages, and lost shipments require timely analysis and appropriate customer support.
 
-LLM-Powered Analysis: Uses a language model to interpret shipment reports.
+This project uses a language model and Python-based processing logic to analyze shipment reports and generate structured results that support shipment exception handling.
 
-Compensation Estimation: Estimates compensation based on shipment information and applicable logic.
+The application provides a Gradio interface where users can submit shipment details and review the analysis.
 
-Structured Processing: Organizes the workflow into separate modules for easier maintenance.
+## Key Features
 
-Interactive Interface: Provides a Gradio-based interface for interacting with the application.
+- **Exception Classification:** Identifies shipment issues such as delays, damage, and lost shipments.
+- **Compensation Assessment:** Calculates a compensation amount and explains the reasoning.
+- **Escalation Assessment:** Identifies cases that require manager attention.
+- **Customer Communication:** Generates a draft email for the customer.
+- **Manager Escalation Notes:** Provides a note for cases requiring escalation.
+- **Session Tracking:** Maintains a daily summary of processed shipment exceptions.
+- **Interactive Interface:** Provides an easy-to-use interface built with Gradio.
 
-Tech Stack
+## Agent Workflow
 
-Python
+1. **Input:** The user enters a shipment report, shipment value, and customer type.
+2. **Analysis:** The processing pipeline analyzes the shipment information.
+3. **Classification:** The shipment exception is categorized.
+4. **Compensation:** The system determines a compensation amount and provides its reasoning.
+5. **Escalation:** The system assesses whether manager escalation is required.
+6. **Communication:** A customer email and, when applicable, a manager note are generated.
+7. **Session Summary:** The result is recorded and included in the session summary.
 
-Groq API
+## Workflow Diagram
 
-OpenAI Python SDK
+```text
+Shipment Report + Shipment Value + Customer Type
+                       |
+                       v
+              Shipment Processing
+                       |
+                       v
+              Exception Classification
+                       |
+                       v
+              Compensation Assessment
+                       |
+                       v
+              Escalation Assessment
+                       |
+                       v
+          +------------+-------------+
+          |                          |
+          v                          v
+    Customer Email           Manager Escalation Note
+          |                          |
+          +------------+-------------+
+                       |
+                       v
+              Session Summary
+                       |
+                       v
+                Gradio Interface
+```
 
-Gradio
+## Tech Stack
 
-Project Structure
+- **Language:** Python
+- **LLM Provider:** Groq API
+- **LLM Integration:** LangChain Groq
+- **User Interface:** Gradio
+- **Configuration:** python-dotenv
+- **Testing:** pytest-compatible test files
 
+## Project Structure
+
+```text
 Shipment-Desk/
 ├── app.py
+├── main.py
 ├── chains.py
 ├── llm.py
-├── main.py
 ├── pipeline.py
 ├── session.py
 ├── tools.py
-├── requirements.txt
 ├── test_chains.py
 ├── test_pipeline.py
 ├── test_tools.py
+├── requirements.txt
 ├── .gitignore
-└── README.md
+├── README.md
+└── images/
+    └── gradio-interface.png
+```
 
-Getting Started
+## Getting Started
 
-1. Clone the repository
+### 1. Clone the Repository
 
+```bash
 git clone https://github.com/AmberG19/Shipment-Desk.git
 cd Shipment-Desk
+```
 
-2. Create a virtual environment
+### 2. Create a Virtual Environment
 
-python -m venv .venv
+**Windows:**
 
-Activate it on Windows PowerShell:
+```powershell
+py -m venv .venv
+.venv\Scripts\Activate.ps1
+```
 
-.\.venv\Scripts\Activate.ps1
+### 3. Install Dependencies
 
-3. Install dependencies
+```bash
+py -m pip install -r requirements.txt
+```
 
-pip install -r requirements.txt
+### 4. Configure the API Key
 
-4. Configure the API key
+Create a `.env` file in the project root:
 
-Create a .env file in the project root and add your Groq API key:
-
+```text
 GROQ_API_KEY=your_groq_api_key_here
+```
 
-Replace the placeholder with your own API key.
+Replace the placeholder with your own Groq API key. Never commit the `.env` file or publish your API key.
 
-5. Run the application
+### 5. Run the Application
 
-Run the entry point appropriate to your setup. If app.py launches the Gradio interface, use:
+```bash
+py app.py
+```
 
-python app.py
+Open the local URL displayed in the terminal to use the Gradio interface.
 
-Security
+## Testing
 
-Keep API keys and other secrets in your local .env file.
+The repository includes test files for the project's tools, chains, and processing pipeline.
 
-Never upload .env or expose your API key in source code.
+Run the tests with:
 
-The repository's .gitignore excludes local secrets and development files.
+```bash
+py -m pytest
+```
 
-About This Project
+## Security and Limitations
 
-This project is part of an AI engineering learning journey, exploring LLM-powered workflows, modular Python code, and practical shipment exception handling.
+- An active Groq API key and internet connection are required for LLM-powered processing.
+- Compensation assessments are generated by application logic and/or an LLM; they should be reviewed before being used for actual customer refunds or payments.
+- The application should be evaluated with representative test cases before use in a production environment.
+- Use fictional shipment information for public demonstrations.
+
+## Future Improvements
+
+- Deploy the Gradio application for persistent public access.
+- Add more comprehensive automated tests and edge-case validation.
+- Improve error handling and structured output validation.
+- Integrate shipment tracking systems and configurable compensation policies.
+
+## Learning Outcomes
+
+This project demonstrates practical experience with LLM integration, Python application development, shipment exception processing, structured outputs, session-level summaries, and building an interactive AI application.
+
+---
+
+**Author:** AmberG19
+
+**Repository:** [Shipment-Desk](https://github.com/AmberG19/Shipment-Desk)
 
 
 
